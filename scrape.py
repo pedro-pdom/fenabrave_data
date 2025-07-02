@@ -60,7 +60,7 @@ def download_all_pdfs(start_year = 2003, end_year = 2025, start_month = 1, end_m
     data = {"__RequestVerificationToken": token}
 
     for year in range(start_year, end_year + 1):
-        for month in range(start_month, end_month):
+        for month in range(start_month, end_month + 1):
             url = f"https://www.fenabrave.org.br/portal/files/{year}_{month:02d}_02.pdf"
             output_name = f"{year}_{month:02d}.pdf"
 
@@ -84,8 +84,8 @@ def validate_year(value):
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--start-year", type=validate_year, required=True)
-    parser.add_argument("--end-year", type=validate_year, required=True)
+    parser.add_argument("--start-year", type=validate_year, default=2003)
+    parser.add_argument("--end-year", type=validate_year, default=2025)
     parser.add_argument("--start-month", type=validate_month, default=1)
     parser.add_argument("--end-month", type=validate_month, default=12)
     return parser.parse_args()
